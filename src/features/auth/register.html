@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar - Eksplora</title>
+    <link href="../../css/output.css" rel="stylesheet" />
+  </head>
+  <body class="bg-white font-sans antialiased h-screen flex overflow-hidden">
+    <div
+      class="hidden lg:flex w-1/2 bg-gray-900 relative justify-center items-center"
+    >
+      <div
+        class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2074')] bg-cover bg-center opacity-60"
+      ></div>
+      <div class="relative z-10 text-center text-white px-12">
+        <h2 class="text-5xl font-bold mb-6 tracking-tight">
+          Mulai Petualangan.
+        </h2>
+        <p class="text-xl text-gray-200 font-light">
+          Bergabunglah dengan ribuan pelancong lainnya.
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="w-full lg:w-1/2 flex flex-col justify-center px-8 md:px-16 lg:px-24 py-12 overflow-y-auto"
+    >
+      <div class="max-w-md w-full mx-auto">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Buat Akun Baru</h1>
+        <p class="text-gray-500 mb-8">
+          Lengkapi data diri Anda sesuai identitas.
+        </p>
+
+        <form id="register-form" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Nama Lengkap</label
+            >
+            <input
+              type="text"
+              id="full_name"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Sesuai KTP"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Username</label
+            >
+            <input
+              type="text"
+              id="username"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Unik, tanpa spasi"
+            />
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                required
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                placeholder="nama@email.com"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >No. Telepon</label
+              >
+              <input
+                type="tel"
+                id="phone"
+                required
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                placeholder="0812..."
+              />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Password</label
+            >
+            <input
+              type="password"
+              id="password"
+              required
+              class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Minimal 8 karakter"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition shadow-lg shadow-blue-500/30 mt-2"
+          >
+            Daftar
+          </button>
+        </form>
+
+        <div class="mt-8 text-center text-sm text-gray-500">
+          Sudah punya akun?
+          <a href="login.html" class="text-blue-600 font-bold hover:underline"
+            >Masuk</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./auth.js"></script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "res-fe-user",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tailwindcss -i ./src/css/input.css -o ./src/css/output.css --watch",
+    "build": "tailwindcss -i ./src/css/input.css -o ./src/css/output.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0"
+  }
+}

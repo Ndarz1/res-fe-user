@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/* Navbar */
+#main-navbar {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+#main-navbar.scrolled {
+  background-color: white !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+#main-navbar.scrolled * {
+  color: #1f2937 !important;
+}
+
+#main-navbar.scrolled span.text-blue-100 {
+  color: #2563eb !important;
+}
+
+#main-navbar.scrolled .border-white {
+  border-color: #d1d5db !important;
+}
+
+#main-navbar.scrolled .bg-white {
+  background-color: #d1d5db !important;
+}
+
+.animate-kenburns {
+  animation: kenburns 30s ease-in-out infinite alternate;
+}
+
+@keyframes kenburns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+/* Hero */
+@layer utilities {
+  .animate-subtle-zoom {
+    animation: subtleZoom 20s infinite alternate;
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 1s ease-out forwards;
+  }
+  .animate-fade-in-down {
+    animation: fadeInDown 1s ease-out forwards;
+  }
+
+  @keyframes subtleZoom {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

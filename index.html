@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eksplora.</title>
+    <link href="./src/css/output.css" rel="stylesheet" />
+  </head>
+  <body
+    class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen"
+  >
+    <header id="navbar-placeholder"></header>
+
+    <main class="flex-grow">
+      <div id="hero-placeholder"></div>
+      <div id="destinations-placeholder"></div>
+      <div id="spotlight-placeholder"></div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script type="module">
+      import { loadNavbar } from "./src/features/navbar/navbar.js";
+      import { loadHero } from "./src/features/hero/hero.js";
+      import { loadDestinations } from "./src/features/destinations/destinations.js";
+      import { loadCategories } from "./src/features/categories/categories.js";
+      import { loadSpotlight } from "./src/features/spotlight/spotlight.js";
+      import { loadFooter } from "./src/features/footer/footer.js";
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        loadNavbar();
+        loadHero();
+        await loadDestinations();
+        loadCategories();
+        loadSpotlight();
+        loadFooter();
+      });
+    </script>
+  </body>
+</html>
