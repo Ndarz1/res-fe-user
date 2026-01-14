@@ -17,27 +17,46 @@ function checkAuthStatus() {
 
   if (!container) return;
 
-  if (userStr) {
-    const user = JSON.parse(userStr);
-    container.innerHTML = `
-        <div class="flex items-center gap-4">
-            <span class="text-sm font-medium text-white/90">Halo, ${user.full_name}</span>
-            <button id="btn-logout" class="px-5 py-2 text-sm font-medium text-white bg-white/10 border border-white/20 rounded-full hover:bg-white/20 transition-all backdrop-blur-sm">
-                Keluar
-            </button>
-        </div>
-    `;
+  if (userStr && userStr !== "undefined") {
+    try {
+      const user = JSON.parse(userStr);
 
-    document.getElementById("btn-logout").addEventListener("click", () => {
-      localStorage.removeItem("auth_token");
+      let avatarHTML;
+      if (user.profile_image) {
+        const imgUrl = `http://localhost:8080${
+          user.profile_image
+        }?t=${new Date().getTime()}`;
+        avatarHTML = `
+          <img src="${imgUrl}" alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-md ring-2 ring-white/20 bg-gray-800" />
+        `;
+      } else {
+        avatarHTML = `
+          <div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold shadow-md ring-2 ring-white/20">
+              ${user.full_name ? user.full_name.charAt(0).toUpperCase() : "U"}
+          </div>
+        `;
+      }
+
+      container.innerHTML = `
+          <div class="flex items-center gap-4">
+              <a href="/profile.html" class="flex items-center gap-2 hover:bg-white/10 px-3 py-1.5 rounded-full transition-all group border border-transparent hover:border-white/10">
+                  ${avatarHTML}
+                  <span class="text-sm font-medium text-white/90 group-hover:text-white">
+                      Hai, ${user.username || "User"}
+                  </span>
+              </a>
+          </div>
+      `;
+    } catch (error) {
       localStorage.removeItem("user_data");
-      window.location.reload();
-    });
+    }
   }
 }
 
 function initScrollEffect() {
   const nav = document.getElementById("main-navbar");
+
+  if (!nav) return;
 
   window.addEventListener("scroll", () => {
     if (window.scrollY > 20) {

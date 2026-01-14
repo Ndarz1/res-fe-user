@@ -1,190 +1,213 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Booking - Eksplora</title>
+    <title>Konfirmasi Pesanan - Eksplora</title>
+
     <link href="./src/css/output.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+              serif: ['"Playfair Display"', "serif"],
+            },
+            colors: {
+              slate: { 850: "#1e293b", 900: "#0f172a" },
+            },
+          },
+        },
+      };
+    </script>
   </head>
-  <body class="bg-gray-50 text-gray-900 font-sans antialiased">
-    <header class="bg-white border-b border-gray-200 py-4 sticky top-0 z-30">
-      <div class="max-w-7xl mx-auto px-6 flex items-center gap-4">
-        <a
-          href="#"
-          onclick="history.back(); return false;"
-          class="p-2 hover:bg-gray-100 rounded-full transition"
+
+  <body class="bg-slate-50 font-sans antialiased text-slate-900">
+    <header
+      class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 transition-all duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-6 h-20 flex items-center">
+        <button
+          onclick="history.back()"
+          class="group inline-flex items-center gap-3 text-slate-500 hover:text-blue-900 font-medium transition-colors text-sm tracking-widest uppercase focus:outline-none"
         >
-          <svg
-            class="w-6 h-6 text-gray-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+          <span
+            class="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-blue-900 group-hover:bg-blue-50 transition-all"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            ></path>
-          </svg>
-        </a>
-        <h1 class="text-xl font-bold">Konfirmasi Pemesanan</h1>
+            <svg
+              class="w-4 h-4 transition-transform group-hover:-translate-x-0.5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              ></path>
+            </svg>
+          </span>
+          Batal & Kembali
+        </button>
       </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-8">
-      <form id="booking-form" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="lg:col-span-2 space-y-6">
+    <main class="max-w-7xl mx-auto px-6 py-32">
+      <div class="flex flex-col lg:flex-row gap-12">
+        <div class="w-full lg:w-2/3 space-y-8">
           <div
-            class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100"
+            class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-slate-100"
           >
-            <div
-              class="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4"
+            <h2
+              class="text-3xl font-serif font-medium mb-8 text-slate-900 border-b border-slate-100 pb-4"
             >
-              <div
-                class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm"
-              >
-                1
-              </div>
-              <h2 class="text-lg font-bold">Data Diri</h2>
-            </div>
-
-            <div class="space-y-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1"
-                  >Nama Lengkap</label
-                >
-                <input
-                  type="text"
-                  name="full_name"
-                  required
-                  class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                  placeholder="Sesuai KTP"
-                />
-              </div>
-
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              Informasi Pemesan
+            </h2>
+            <form id="booking-form" class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                  <label
+                    class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2"
+                    >Nama Lengkap</label
+                  >
+                  <input
+                    type="text"
+                    id="fullname"
+                    readonly
+                    class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-500 font-medium cursor-not-allowed focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2"
                     >Email</label
                   >
                   <input
                     type="email"
-                    name="email"
-                    required
-                    class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    placeholder="email@contoh.com"
-                  />
-                </div>
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-1"
-                    >Nomor Telepon / WA</label
-                  >
-                  <input
-                    type="tel"
-                    name="phone"
-                    required
-                    class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    placeholder="0812..."
+                    id="email"
+                    readonly
+                    class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-500 font-medium cursor-not-allowed focus:outline-none"
                   />
                 </div>
               </div>
-
               <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1"
-                  >Catatan Tambahan (Opsional)</label
+                <label
+                  class="block text-xs font-bold uppercase tracking-wider text-slate-900 mb-2"
+                  >Nomor WhatsApp (Aktif)</label
                 >
-                <textarea
-                  name="notes"
-                  rows="2"
-                  class="w-full p-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                  placeholder="Permintaan khusus..."
-                ></textarea>
+                <input
+                  type="tel"
+                  id="phone"
+                  class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-blue-900 focus:ring-1 focus:ring-blue-900 focus:outline-none transition-colors"
+                  placeholder="Contoh: 081234567890"
+                />
+                <p class="text-[10px] text-slate-400 mt-2 italic">
+                  E-tiket akan dikirimkan ke nomor ini.
+                </p>
               </div>
-            </div>
+            </form>
           </div>
 
           <div
-            class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100"
+            class="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-slate-100"
           >
-            <div
-              class="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4"
+            <h2
+              class="text-3xl font-serif font-medium mb-8 text-slate-900 border-b border-slate-100 pb-4"
             >
-              <div
-                class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm"
-              >
-                2
-              </div>
-              <h2 class="text-lg font-bold">Metode Pembayaran</h2>
-            </div>
-
-            <div class="space-y-3">
-              <label
-                class="flex items-center gap-4 p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition group"
-              >
+              Metode Pembayaran
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <label class="cursor-pointer group">
                 <input
                   type="radio"
-                  name="payment_method"
-                  value="qris"
+                  name="payment"
+                  value="transfer"
+                  class="peer sr-only"
                   checked
-                  class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 />
-                <div class="flex-grow">
-                  <span class="block font-bold text-gray-900"
-                    >QRIS Instant</span
-                  >
-                  <span class="text-sm text-gray-500"
-                    >GoPay, OVO, Dana, ShopeePay</span
-                  >
+                <div
+                  class="p-6 rounded-2xl border border-slate-200 peer-checked:border-blue-900 peer-checked:bg-blue-50/50 transition-all hover:border-blue-200"
+                >
+                  <div class="flex items-center gap-4 mb-3">
+                    <div
+                      class="w-5 h-5 rounded-full border border-slate-300 peer-checked:border-blue-900 peer-checked:bg-blue-900 flex items-center justify-center"
+                    >
+                      <div
+                        class="w-2 h-2 bg-white rounded-full opacity-0 peer-checked:opacity-100"
+                      ></div>
+                    </div>
+                    <span class="font-bold text-slate-900">Transfer Bank</span>
+                  </div>
+                  <p class="text-xs text-slate-500 ml-9">
+                    BCA, Mandiri, BNI, BRI
+                  </p>
                 </div>
               </label>
-
-              <label
-                class="flex items-center gap-4 p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition group"
-              >
+              <label class="cursor-pointer group">
                 <input
                   type="radio"
-                  name="payment_method"
-                  value="transfer"
-                  class="w-5 h-5 text-blue-600 focus:ring-blue-500"
+                  name="payment"
+                  value="qris"
+                  class="peer sr-only"
                 />
-                <div class="flex-grow">
-                  <span class="block font-bold text-gray-900"
-                    >Transfer Bank</span
-                  >
-                  <span class="text-sm text-gray-500"
-                    >BCA, Mandiri, BRI, BNI</span
-                  >
+                <div
+                  class="p-6 rounded-2xl border border-slate-200 peer-checked:border-blue-900 peer-checked:bg-blue-50/50 transition-all hover:border-blue-200"
+                >
+                  <div class="flex items-center gap-4 mb-3">
+                    <div
+                      class="w-5 h-5 rounded-full border border-slate-300 peer-checked:border-blue-900 peer-checked:bg-blue-900 flex items-center justify-center"
+                    >
+                      <div
+                        class="w-2 h-2 bg-white rounded-full opacity-0 peer-checked:opacity-100"
+                      ></div>
+                    </div>
+                    <span class="font-bold text-slate-900">QRIS</span>
+                  </div>
+                  <p class="text-xs text-slate-500 ml-9">
+                    Gopay, OVO, Dana, ShopeePay
+                  </p>
                 </div>
               </label>
             </div>
           </div>
         </div>
 
-        <div class="lg:col-span-1">
+        <div class="w-full lg:w-1/3">
           <div
-            class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 sticky top-24"
+            class="bg-white p-8 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-100 sticky top-28"
           >
-            <h2 class="text-lg font-bold mb-4 border-b border-gray-100 pb-4">
-              Ringkasan Pesanan
-            </h2>
+            <h3
+              class="text-lg font-bold font-serif text-slate-900 mb-6 uppercase tracking-widest"
+            >
+              Ringkasan
+            </h3>
 
-            <div class="flex gap-4 mb-6">
+            <div class="flex gap-4 mb-6 pb-6 border-b border-slate-100">
               <img
                 id="summary-img"
                 src=""
-                class="w-20 h-20 object-cover rounded-xl bg-gray-200 shadow-sm"
+                class="w-24 h-24 rounded-lg object-cover bg-slate-100"
               />
               <div>
-                <h3
+                <h4
                   id="summary-title"
-                  class="font-bold text-gray-900 line-clamp-2 text-sm leading-snug"
+                  class="font-serif font-bold text-lg text-slate-900 line-clamp-2 leading-tight mb-1"
                 >
                   Memuat...
-                </h3>
-                <div class="flex items-center gap-1 mt-2 text-xs text-gray-500">
+                </h4>
+                <div class="flex items-center gap-1 text-xs text-slate-500">
                   <svg
-                    class="w-4 h-4"
+                    class="w-3 h-3"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -192,47 +215,68 @@
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      stroke-width="1.5"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    ></path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                     ></path>
                   </svg>
-                  <span id="summary-date">-</span>
+                  <span id="summary-location">...</span>
                 </div>
               </div>
             </div>
 
-            <div class="space-y-3 mb-6 text-sm">
-              <div class="flex justify-between">
-                <span class="text-gray-500">Harga Tiket</span>
-                <span id="summary-price" class="font-medium">Rp 0</span>
+            <div class="space-y-4 mb-8">
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Tanggal</span>
+                <span id="summary-date" class="font-medium text-slate-900"
+                  >...</span
+                >
               </div>
-              <div class="flex justify-between">
-                <span class="text-gray-500">Jumlah Penumpang</span>
-                <span id="summary-qty" class="font-medium">x0</span>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Tiket</span>
+                <span id="summary-qty" class="font-medium text-slate-900"
+                  >... Orang</span
+                >
               </div>
-              <div class="flex justify-between">
-                <span class="text-gray-500">Pajak & Biaya Layanan</span>
-                <span class="text-green-600 font-medium">Gratis</span>
+              <div class="flex justify-between text-sm">
+                <span class="text-slate-500">Harga Satuan</span>
+                <span id="summary-price" class="font-medium text-slate-900"
+                  >...</span
+                >
               </div>
-              <div
-                class="border-t border-dashed border-gray-200 my-2 pt-4 flex justify-between items-center"
-              >
-                <span class="font-bold text-gray-900 text-base"
+            </div>
+
+            <div class="border-t border-dashed border-slate-200 py-6 mb-2">
+              <div class="flex justify-between items-end">
+                <span
+                  class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1"
                   >Total Bayar</span
                 >
-                <span id="summary-total" class="text-xl font-bold text-blue-600"
+                <span
+                  id="summary-total"
+                  class="text-3xl font-serif font-bold text-blue-900"
                   >Rp 0</span
                 >
               </div>
             </div>
 
             <button
-              type="submit"
-              class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-blue-500/30 flex items-center justify-center gap-2"
+              id="btn-pay-now"
+              class="w-full py-4 bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm uppercase tracking-widest rounded-xl shadow-lg transition-all transform active:scale-[0.98]"
             >
-              <span>Bayar Sekarang</span>
+              Bayar Sekarang
+            </button>
+
+            <p
+              class="text-[10px] text-center text-slate-400 mt-4 flex items-center justify-center gap-1"
+            >
               <svg
-                class="w-5 h-5"
+                class="w-3 h-3"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -240,24 +284,43 @@
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  stroke-width="1.5"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                 ></path>
               </svg>
-            </button>
-
-            <p class="text-center text-xs text-gray-400 mt-4">
-              Dengan menekan tombol di atas, Anda menyetujui Syarat & Ketentuan
-              Eksplora.
+              Transaksi Terenkripsi SSL
             </p>
           </div>
         </div>
-      </form>
+      </div>
     </main>
 
-    <script type="module">
-      import { initBooking } from "./src/features/booking/booking.js";
-      document.addEventListener("DOMContentLoaded", initBooking);
-    </script>
+    <div
+      id="toast-notification"
+      class="fixed top-24 right-6 z-[60] transform transition-all duration-500 translate-x-full opacity-0 pointer-events-none"
+    >
+      <div
+        id="toast-border"
+        class="bg-white border-l-4 rounded-r-xl shadow-2xl p-6 flex items-start gap-4 min-w-[350px] max-w-md"
+      >
+        <div id="toast-icon" class="mt-0.5"></div>
+        <div class="flex-1">
+          <h4
+            id="toast-title"
+            class="font-bold font-serif text-slate-900 mb-1 text-lg"
+          >
+            Notifikasi
+          </h4>
+          <p
+            id="toast-message"
+            class="text-sm text-slate-600 leading-relaxed font-light"
+          >
+            Pesan notifikasi.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./src/features/booking/booking.js"></script>
   </body>
 </html>

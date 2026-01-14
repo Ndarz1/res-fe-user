@@ -1,6 +1,11 @@
 import { fetchData } from "../../js/api.js";
 import { formatRupiah, truncateText } from "../../js/utils/format.js";
 
+const NO_IMAGE_BASE64 =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=";
+
+let allDestinations = [];
+
 export async function loadDestinations(categoryId = null) {
   const containerId = "destinations-placeholder";
   const gridId = "destinations-grid";
@@ -17,139 +22,86 @@ export async function loadDestinations(categoryId = null) {
       container = document.getElementById(gridId);
     }
 
-    const result = await getDummyData(categoryId);
+    if (allDestinations.length === 0) {
+      const endpoint = "/wisata";
+      const result = await fetchData(endpoint);
+      if (result && result.length > 0) {
+        allDestinations = result;
+      }
+    }
 
-    if (result && result.length > 0) {
+    if (allDestinations.length > 0) {
       container.innerHTML = "";
-      result.forEach((item) => {
-        container.innerHTML += createCard(item);
-      });
+
+      const filteredData = categoryId
+        ? allDestinations.filter((item) => item.category_id == categoryId)
+        : allDestinations;
+
+      if (filteredData.length > 0) {
+        container.innerHTML = filteredData
+          .map((item) => createCard(item))
+          .join("");
+      } else {
+        showEmptyState(container);
+      }
     } else {
-      container.innerHTML = `
-        <div class="col-span-full py-20 text-center">
-            <p class="text-gray-500 text-lg">Belum ada destinasi untuk kategori ini.</p>
-            <button onclick="window.location.reload()" class="mt-4 text-blue-600 font-medium hover:underline">Reset Filter</button>
-        </div>`;
+      showEmptyState(container);
     }
   } catch (error) {
-    console.error("Error loading destinations:", error);
+    console.error(error);
   }
 }
 
-async function getDummyData(catId) {
-  const data = [
-    {
-      id: 1,
-      nama_tempat: "Pantai Kuta",
-      category_id: 1,
-      category_name: "Pantai",
-      lokasi: "Bali",
-      harga_tiket: 0,
-      rating_total: 4.5,
-      image_url:
-        "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-      id: 2,
-      nama_tempat: "Gunung Bromo",
-      category_id: 2,
-      category_name: "Gunung",
-      lokasi: "Jawa Timur",
-      harga_tiket: 50000,
-      rating_total: 4.8,
-      image_url:
-        "https://images.unsplash.com/photo-1605218457336-92744572228d?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-      id: 3,
-      nama_tempat: "Candi Borobudur",
-      category_id: 3,
-      category_name: "Sejarah",
-      lokasi: "Magelang",
-      harga_tiket: 75000,
-      rating_total: 4.9,
-      image_url:
-        "https://images.unsplash.com/photo-1528497378648-533b01416244?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-      id: 4,
-      nama_tempat: "Pantai Pink",
-      category_id: 1,
-      category_name: "Pantai",
-      lokasi: "NTT",
-      harga_tiket: 15000,
-      rating_total: 4.7,
-      image_url:
-        "https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-      id: 5,
-      nama_tempat: "Nasi Gudeg Yu Djum",
-      category_id: 4,
-      category_name: "Kuliner",
-      lokasi: "Yogyakarta",
-      harga_tiket: 35000,
-      rating_total: 4.6,
-      image_url:
-        "https://images.unsplash.com/photo-1626574943968-30122f8a1a38?auto=format&fit=crop&w=600&q=80",
-    },
-    {
-      id: 6,
-      nama_tempat: "Hutan Pinus Mangunan",
-      category_id: 5,
-      category_name: "Hutan",
-      lokasi: "Bantul, Yogyakarta",
-      harga_tiket: 5000,
-      rating_total: 4.5,
-      image_url:
-        "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=600&q=80",
-    },
-  ];
-
-  if (!catId) return data;
-  return data.filter((item) => item.category_id == catId);
+function showEmptyState(container) {
+  container.innerHTML = `
+        <div class="col-span-full py-24 text-center">
+            <p class="font-serif text-2xl text-slate-800 italic mb-2">Destinasi tidak ditemukan</p>
+            <p class="text-slate-500 font-light text-sm font-sans">Silakan pilih kategori yang berbeda.</p>
+        </div>`;
 }
 
 function createCard(item) {
-  const imgUrl =
-    item.image_url || "https://via.placeholder.com/600x400?text=No+Image";
+  const imgUrl = item.image_url || NO_IMAGE_BASE64;
+  const ratingScore = item.rating_total
+    ? parseFloat(item.rating_total).toFixed(1)
+    : "New";
+  const reviewCount = item.total_reviews || 0;
 
   return `
-        <a href="detail.html?id=${
-          item.id
-        }" class="group block h-full fade-in-up bg-white rounded-2xl hover:shadow-xl transition-shadow duration-300">
-            <div class="relative overflow-hidden rounded-2xl aspect-[4/3] mb-4">
+        <a href="detail.html?id=${item.id}" 
+           class="group block h-full bg-white transition-colors duration-300">
+            
+            <div class="relative overflow-hidden aspect-[4/5] mb-5 bg-gray-100">
                 <img src="${imgUrl}" 
                      alt="${item.nama_tempat}" 
-                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                     class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                      loading="lazy"
-                     onerror="this.src='https://via.placeholder.com/600x400?text=Image+Error'">
+                     onerror="this.onerror=null;this.src='${NO_IMAGE_BASE64}'">
                 
-                <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-gray-900 shadow-sm flex items-center gap-1">
-                    <svg class="w-3 h-3 text-yellow-500 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                    ${item.rating_total}
+                <div class="absolute top-0 right-0 bg-white/95 backdrop-blur-sm px-3 py-2 text-xs font-serif font-bold text-slate-900 z-10">
+                    ★ ${ratingScore} <span class="font-sans font-normal text-slate-400 ml-1">(${reviewCount})</span>
                 </div>
             </div>
 
-            <div class="flex flex-col flex-grow px-1 pb-4">
-                <p class="text-xs font-bold text-blue-600 mb-1 uppercase tracking-wider">${
-                  item.category_name
-                }</p>
-                <h3 class="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-1 mb-1">
+            <div class="pr-2 pb-4">
+                <p class="text-[10px] font-bold tracking-[0.2em] text-blue-900 uppercase mb-3 opacity-60 group-hover:opacity-100 transition-opacity">
+                    ${item.category_name || "Wisata"}
+                </p>
+                
+                <h3 class="text-2xl font-serif text-slate-900 group-hover:text-blue-900 transition-colors mb-2 leading-tight line-clamp-1">
                     ${item.nama_tempat}
                 </h3>
                 
-                <div class="flex items-center gap-1 text-gray-500 text-sm mb-4">
-                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    <span class="truncate">${truncateText(
-                      item.lokasi,
-                      25
-                    )}</span>
+                <div class="flex items-center gap-2 text-slate-500 text-sm font-light mb-6 font-sans">
+                   <span class="truncate tracking-wide">${truncateText(
+                     item.lokasi || "Lokasi tidak tersedia",
+                     35
+                   )}</span>
                 </div>
 
-                <div class="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto">
-                    <span class="text-xs text-gray-400">Harga Tiket</span>
-                    <span class="text-lg font-bold text-gray-900">${formatRupiah(
+                <div class="flex items-center justify-between border-t border-slate-100 pt-4 mt-auto">
+                    <span class="text-xs text-slate-400 font-medium uppercase tracking-wider font-sans">Mulai dari</span>
+                    <span class="text-lg font-medium text-slate-900 font-serif italic">${formatRupiah(
                       item.harga_tiket
                     )}</span>
                 </div>

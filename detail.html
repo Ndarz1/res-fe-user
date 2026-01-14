@@ -4,23 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Detail Destinasi - Eksplora</title>
+
     <link href="./src/css/output.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+              serif: ['"Playfair Display"', "serif"],
+            },
+            colors: {
+              slate: { 850: "#1e293b", 900: "#0f172a" },
+            },
+          },
+        },
+      };
+    </script>
   </head>
+
   <body
-    class="bg-gray-50 text-gray-900 font-sans antialiased flex flex-col min-h-screen"
+    class="bg-white text-slate-900 font-sans antialiased flex flex-col min-h-screen"
   >
-    <main class="flex-grow pt-8 pb-12">
-      <div class="max-w-7xl mx-auto px-6 mb-6">
+    <header
+      class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 transition-all duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-6 h-16 flex items-center">
         <a
-          href="#"
-          onclick="history.back(); return false;"
-          class="inline-flex items-center gap-2 text-gray-500 hover:text-blue-600 font-medium transition-colors group"
+          href="/"
+          class="group inline-flex items-center gap-3 text-slate-500 hover:text-blue-900 font-medium transition-colors text-sm tracking-widest uppercase"
         >
-          <div
-            class="p-2 bg-white border border-gray-200 rounded-full group-hover:border-blue-200 group-hover:bg-blue-50 transition-all"
+          <span
+            class="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-blue-900 group-hover:bg-blue-50 transition-all"
           >
             <svg
-              class="w-5 h-5"
+              class="w-4 h-4 transition-transform group-hover:-translate-x-0.5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -28,40 +54,45 @@
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                stroke-width="2"
+                stroke-width="1.5"
                 d="M10 19l-7-7m0 0l7-7m-7 7h18"
               ></path>
             </svg>
-          </div>
-          <span>Kembali ke Beranda</span>
+          </span>
+          Kembali
         </a>
       </div>
+    </header>
 
-      <div id="loading-state" class="flex justify-center items-center h-64">
+    <main class="flex-grow pt-24 pb-20">
+      <div id="loading-state" class="flex justify-center items-center h-[50vh]">
         <div
-          class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"
+          class="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-900"
         ></div>
       </div>
 
       <div
         id="detail-content"
-        class="hidden max-w-7xl mx-auto px-6 animate-fade-in-up"
+        class="hidden max-w-7xl mx-auto px-6 animate-fade-in"
       >
-        <div class="mb-8">
+        <div class="max-w-4xl mb-8">
           <span
             id="detail-category"
-            class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-600 text-xs font-bold uppercase tracking-wider mb-3"
+            class="inline-block py-1 px-0 border-b border-blue-900 text-blue-900 text-xs font-bold uppercase tracking-[0.2em] mb-4"
           >
             Kategori
           </span>
           <h1
             id="detail-title"
-            class="text-3xl md:text-5xl font-bold text-gray-900 mb-2"
+            class="text-4xl md:text-6xl font-serif font-medium text-slate-900 mb-4 leading-tight"
           >
             Nama Destinasi
           </h1>
-          <div class="flex items-center text-gray-500 gap-4 text-sm">
-            <span class="flex items-center gap-1">
+
+          <div
+            class="flex items-center gap-6 text-slate-500 text-sm font-light"
+          >
+            <span class="flex items-center gap-2">
               <svg
                 class="w-4 h-4"
                 fill="none"
@@ -71,176 +102,278 @@
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
+                  stroke-width="1.5"
                   d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
                 ></path>
                 <path
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
+                  stroke-width="1.5"
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 ></path>
               </svg>
-              <span id="detail-location">Lokasi</span>
+              <span id="detail-location" class="tracking-wide">Lokasi</span>
             </span>
-            <span class="flex items-center gap-1">
-              <svg
-                class="w-4 h-4 text-yellow-500 fill-current"
-                viewBox="0 0 24 24"
+            <span class="w-px h-4 bg-slate-200"></span>
+            <span class="flex items-center gap-2">
+              <span class="text-yellow-500">★</span>
+              <span
+                id="detail-rating"
+                class="font-serif italic text-slate-900 text-lg"
+                >0.0</span
               >
-                <path
-                  d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-                />
-              </svg>
-              <span id="detail-rating">4.8</span> (120 Review)
             </span>
           </div>
         </div>
 
-        <div
-          class="grid grid-cols-1 md:grid-cols-3 gap-4 h-[400px] md:h-[500px] mb-10 overflow-hidden rounded-3xl"
-        >
-          <div class="md:col-span-2 h-full">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+          <div
+            class="md:col-span-2 relative h-[300px] md:h-[500px] rounded-2xl overflow-hidden group shadow-sm"
+          >
             <img
               id="detail-image-main"
               src=""
               alt="Main Image"
-              class="w-full h-full object-cover hover:scale-105 transition-transform duration-700 cursor-pointer"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 cursor-pointer bg-slate-100"
             />
           </div>
-          <div class="hidden md:flex flex-col gap-4 h-full">
-            <img
-              id="detail-image-sec1"
-              src=""
-              alt="Gallery 1"
-              class="w-full h-1/2 object-cover hover:scale-105 transition-transform duration-700 cursor-pointer"
-            />
-            <div class="relative h-1/2 group cursor-pointer overflow-hidden">
+
+          <div class="hidden md:flex flex-col gap-4 h-[500px]">
+            <div
+              class="relative h-1/2 w-full rounded-2xl overflow-hidden group shadow-sm"
+            >
+              <img
+                id="detail-image-sec1"
+                src=""
+                alt="Gallery 1"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 cursor-pointer bg-slate-100"
+              />
+            </div>
+            <div
+              class="relative h-1/2 w-full rounded-2xl overflow-hidden group shadow-sm"
+            >
               <img
                 id="detail-image-sec2"
                 src=""
                 alt="Gallery 2"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                class="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 cursor-pointer bg-slate-100"
               />
               <div
-                class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                class="absolute inset-0 bg-slate-900/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
               >
-                <span class="text-white font-medium">Lihat Semua Foto</span>
+                <span
+                  class="text-white font-serif italic tracking-wide text-sm border-b border-white pb-0.5"
+                  >Lihat Galeri</span
+                >
               </div>
             </div>
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <div class="lg:col-span-2 space-y-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-8 space-y-16">
             <section>
-              <h3 class="text-2xl font-bold text-gray-900 mb-4">
+              <h3 class="text-2xl font-serif text-slate-900 mb-6">
                 Tentang Destinasi
               </h3>
-              <p id="detail-desc" class="text-gray-600 leading-relaxed text-lg">
-                Deskripsi panjang akan muncul di sini.
+              <p
+                id="detail-desc"
+                class="text-slate-600 leading-relaxed text-lg font-light"
+              >
+                Deskripsi akan muncul di sini.
               </p>
             </section>
 
             <section>
-              <h3 class="text-2xl font-bold text-gray-900 mb-6">
+              <h3 class="text-2xl font-serif text-slate-900 mb-6">
                 Fasilitas Utama
               </h3>
-              <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div
-                  class="flex items-center gap-3 p-4 bg-white border border-gray-100 rounded-xl"
-                >
-                  <span class="p-2 bg-blue-50 text-blue-600 rounded-lg"
-                    ><svg
-                      class="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M5 13l4 4L19 7"
-                      ></path></svg
-                  ></span>
-                  <span class="text-gray-700 font-medium">Parkir Luas</span>
-                </div>
+              <div
+                id="detail-facilities"
+                class="grid grid-cols-2 gap-y-4 gap-x-8"
+              >
+                <p class="text-slate-400 italic font-light">
+                  Memuat fasilitas...
+                </p>
               </div>
+            </section>
+
+            <section class="border-t border-slate-100 pt-12">
+              <div class="flex items-center justify-between mb-8">
+                <h3 class="text-2xl font-serif text-slate-900">Kata Mereka</h3>
+                <button
+                  onclick="document.getElementById('review-form-container').classList.toggle('hidden')"
+                  class="text-sm font-bold text-blue-900 uppercase tracking-widest border-b border-blue-900 pb-1 hover:text-blue-700 hover:border-blue-700 transition-colors"
+                >
+                  Tulis Ulasan
+                </button>
+              </div>
+
+              <div
+                id="review-form-container"
+                class="hidden mb-12 bg-slate-50 p-8 rounded-2xl border border-slate-100"
+              >
+                <h4 class="font-bold text-slate-900 mb-2">
+                  Bagikan Pengalaman
+                </h4>
+                <form id="form-review" class="space-y-4">
+                  <div class="flex items-center gap-1">
+                    <div id="star-container" class="flex gap-1">
+                      <button
+                        type="button"
+                        class="star-btn text-2xl text-slate-300 hover:text-yellow-500 transition"
+                        data-value="1"
+                      >
+                        ★
+                      </button>
+                      <button
+                        type="button"
+                        class="star-btn text-2xl text-slate-300 hover:text-yellow-500 transition"
+                        data-value="2"
+                      >
+                        ★
+                      </button>
+                      <button
+                        type="button"
+                        class="star-btn text-2xl text-slate-300 hover:text-yellow-500 transition"
+                        data-value="3"
+                      >
+                        ★
+                      </button>
+                      <button
+                        type="button"
+                        class="star-btn text-2xl text-slate-300 hover:text-yellow-500 transition"
+                        data-value="4"
+                      >
+                        ★
+                      </button>
+                      <button
+                        type="button"
+                        class="star-btn text-2xl text-slate-300 hover:text-yellow-500 transition"
+                        data-value="5"
+                      >
+                        ★
+                      </button>
+                    </div>
+                    <span
+                      id="rating-label"
+                      class="ml-3 text-sm font-medium text-slate-500"
+                      >Pilih Rating</span
+                    >
+                    <input type="hidden" id="rating-input" required />
+                  </div>
+                  <textarea
+                    id="review-comment"
+                    rows="3"
+                    class="w-full p-4 rounded-xl border border-slate-200 bg-white focus:ring-1 focus:ring-blue-900 outline-none text-sm"
+                    placeholder="Ceritakan pengalaman Anda..."
+                    required
+                  ></textarea>
+                  <button
+                    type="submit"
+                    class="bg-slate-900 text-white px-8 py-3 rounded-full font-medium hover:bg-slate-800 transition shadow-lg"
+                  >
+                    Kirim Ulasan
+                  </button>
+                </form>
+              </div>
+
+              <div
+                id="login-prompt"
+                class="hidden mb-10 p-6 bg-slate-50 rounded-xl text-center border border-slate-200"
+              >
+                <p class="text-slate-600 mb-2 font-light">
+                  Ingin menulis ulasan?
+                </p>
+                <a
+                  href="/src/features/auth/login.html"
+                  class="text-blue-900 font-bold border-b border-blue-900 pb-0.5"
+                  >Masuk Akun</a
+                >
+              </div>
+
+              <div id="reviews-list" class="space-y-8"></div>
             </section>
           </div>
 
-          <div class="lg:col-span-1">
-            <div
-              class="sticky top-8 bg-white p-6 rounded-2xl border border-gray-200 shadow-xl"
-            >
-              <div class="flex justify-between items-end mb-6">
-                <div>
-                  <p class="text-sm text-gray-500 mb-1">Harga Tiket Masuk</p>
-                  <div class="flex items-end gap-1">
+          <div class="lg:col-span-4">
+            <div class="sticky top-24">
+              <div
+                class="bg-white p-8 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-100"
+              >
+                <div class="mb-6 pb-6 border-b border-slate-100">
+                  <p
+                    class="text-xs text-slate-400 uppercase tracking-widest mb-1"
+                  >
+                    Harga Tiket
+                  </p>
+                  <div class="flex items-baseline gap-1">
                     <span
                       id="detail-price"
-                      class="text-3xl font-bold text-gray-900"
+                      class="text-3xl font-serif font-bold text-slate-900"
                       >Rp 0</span
                     >
-                    <span class="text-gray-500 mb-1">/ orang</span>
+                    <span class="text-slate-400 font-light text-sm"
+                      >/ orang</span
+                    >
                   </div>
                 </div>
-              </div>
 
-              <div class="space-y-4 mb-6">
-                <div class="p-4 bg-gray-50 rounded-xl border border-gray-100">
-                  <p
-                    class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-2"
-                  >
-                    Tanggal Kunjungan
-                  </p>
-                  <input
-                    id="booking-date"
-                    type="date"
-                    class="w-full bg-transparent font-medium focus:outline-none text-gray-900"
-                  />
-                </div>
-                <div
-                  class="p-4 bg-gray-50 rounded-xl border border-gray-100 flex justify-between items-center"
-                >
+                <div class="space-y-5">
                   <div>
-                    <p
-                      class="text-xs text-gray-500 uppercase tracking-wide font-bold mb-1"
+                    <label
+                      class="block text-xs font-bold text-slate-900 uppercase tracking-wide mb-2"
+                      >Tanggal Kunjungan</label
                     >
-                      Jumlah Tiket
-                    </p>
-                    <p class="text-sm text-gray-900">
-                      <span id="ticket-count">1</span> Orang
-                    </p>
+                    <input
+                      id="booking-date"
+                      type="date"
+                      class="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg text-slate-900 font-medium focus:outline-none focus:border-blue-900 transition cursor-pointer"
+                    />
                   </div>
-                  <div class="flex items-center gap-3">
-                    <button
-                      id="btn-decrease"
-                      class="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:bg-gray-100 transition"
+
+                  <div>
+                    <label
+                      class="block text-xs font-bold text-slate-900 uppercase tracking-wide mb-2"
+                      >Jumlah Tiket</label
                     >
-                      -
-                    </button>
-                    <button
-                      id="btn-increase"
-                      class="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:bg-gray-100 transition"
+                    <div
+                      class="flex items-center justify-between p-3 bg-slate-50 border border-slate-200 rounded-lg"
                     >
-                      +
-                    </button>
+                      <button
+                        id="btn-decrease"
+                        class="w-8 h-8 rounded-md bg-white text-slate-500 hover:text-slate-900 border border-slate-200 flex items-center justify-center transition disabled:opacity-50"
+                      >
+                        -
+                      </button>
+                      <span
+                        id="ticket-count"
+                        class="font-serif text-xl font-bold text-slate-900"
+                        >1</span
+                      >
+                      <button
+                        id="btn-increase"
+                        class="w-8 h-8 rounded-md bg-white text-slate-500 hover:text-slate-900 border border-slate-200 flex items-center justify-center transition"
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
+
+                  <button
+                    id="btn-book-now"
+                    class="w-full py-4 bg-blue-900 text-white font-medium text-sm tracking-widest uppercase rounded-lg hover:bg-blue-800 transition-all duration-300 shadow-lg hover:shadow-blue-900/30 mt-4"
+                  >
+                    Pesan Sekarang
+                  </button>
+
+                  <p
+                    class="text-center text-[10px] text-slate-400 font-light mt-2"
+                  >
+                    Pembayaran aman & konfirmasi instan.
+                  </p>
                 </div>
               </div>
-
-              <button
-                id="btn-book-now"
-                class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-lg hover:shadow-blue-500/30 mb-4"
-              >
-                Pesan Tiket Sekarang
-              </button>
-
-              <p class="text-center text-xs text-gray-400">
-                Dijamin aman & terpercaya. Pembayaran via QRIS/Transfer.
-              </p>
             </div>
           </div>
         </div>
@@ -258,5 +391,22 @@
         loadFooter();
       });
     </script>
+
+    <style>
+      .animate-fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+        opacity: 0;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
   </body>
 </html>

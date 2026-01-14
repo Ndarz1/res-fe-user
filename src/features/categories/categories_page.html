@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kategori Wisata - Eksplora</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+              serif: ['"Playfair Display"', "serif"],
+            },
+            colors: {
+              primary: {
+                900: "#0f172a",
+                800: "#1e293b",
+                600: "#2563eb",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+        opacity: 0;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-white text-slate-800 antialiased">
+    <div id="navbar-placeholder"></div>
+
+    <header
+      class="relative h-[60vh] flex items-center justify-center overflow-hidden"
+    >
+      <div class="absolute inset-0">
+        <img
+          src="../../../assets/bg-2.jpg"
+          class="w-full h-full object-cover opacity-90"
+          alt="Hero Background"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-white"
+        ></div>
+      </div>
+
+      <div class="relative z-10 text-center max-w-4xl px-6 mt-10">
+        <span
+          class="text-white/80 uppercase tracking-[0.2em] text-sm font-medium mb-4 block fade-in"
+          style="animation-delay: 0.1s"
+        >
+          Kurasi Eksklusif
+        </span>
+        <h1
+          class="text-5xl md:text-7xl font-serif text-white mb-6 leading-tight fade-in"
+          style="animation-delay: 0.3s"
+        >
+          Temukan <span class="italic">Gaya</span> <br />Perjalananmu
+        </h1>
+        <p
+          class="text-white/90 text-lg font-light max-w-2xl mx-auto fade-in"
+          style="animation-delay: 0.5s"
+        >
+          Setiap kategori menawarkan cerita yang berbeda. Pilih yang memanggil
+          jiwamu hari ini.
+        </p>
+      </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 -mt-20 relative z-20 pb-24">
+      <div
+        id="categories-grid"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20"
+      >
+        <div
+          class="bg-white h-64 rounded-xl shadow-sm border border-slate-100 flex items-center justify-center"
+        >
+          <div
+            class="animate-spin rounded-full h-8 w-8 border-b-2 border-slate-800"
+          ></div>
+        </div>
+      </div>
+
+      <div
+        id="result-section"
+        class="hidden opacity-0 transition-opacity duration-700"
+      >
+        <div
+          class="flex items-center justify-between border-b border-slate-200 pb-6 mb-10"
+        >
+          <div>
+            <h3
+              class="text-3xl font-serif text-slate-900"
+              id="selected-category-title"
+            >
+              Semua Koleksi
+            </h3>
+            <p class="text-slate-500 mt-1 font-light">
+              Menampilkan koleksi terbaik kami.
+            </p>
+          </div>
+          <button
+            onclick="resetFilter()"
+            class="text-sm uppercase tracking-wider font-medium text-slate-400 hover:text-slate-900 transition-colors"
+          >
+            Reset Filter
+          </button>
+        </div>
+
+        <div
+          id="destinations-container"
+          class="grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-8"
+        ></div>
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script type="module" src="./categories_page.js"></script>
+  </body>
+</html>
